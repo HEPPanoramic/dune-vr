@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>DUNE VR</title>
+    <meta name="description" content="DUNE VR">
+
+    <script src="https://aframe.io/releases/1.5.0/aframe.min.js"></script>
+
+    <script src="https://unpkg.com/aframe-event-set-component@5/dist/aframe-event-set-component.min.js"></script>
+    <script src="https://unpkg.com/aframe-layout-component@5.3.0/dist/aframe-layout-component.min.js"></script>
+    <script src="https://unpkg.com/aframe-template-component@3.2.2/dist/aframe-template-component.min.js"></script>
+    <script src="https://unpkg.com/aframe-proxy-event-component@2.1.0/dist/aframe-proxy-event-component.min.js"></script>
+   
+    <script src="components/set-image.js"></script>
+  </head>
+  <body>
+    <a-scene>
+      <a-assets>
+
+	<img id="pd2" crossorigin="anonymous" src="img/aaOIxlVQ8Ogy_equirectangular_16384max4_1.jpg">
+	<img id="pd3" crossorigin="anonymous" src="img/tyqEZ6Dk3EPz_equirectangular_16384max4_1.jpg">
+	<img id="pd4" crossorigin="anonymous" src="img/sZcFdUyWDUWk_equirectangular_16384max4_1.jpg">
+        <img id="pd5" crossorigin="anonymous" src="img/vFxvEOLcTeYg_equirectangular_16384max4.jpg">
+        <img id="pd6" crossorigin="anonymous" src="img/CElRvU108Bbr_equirectangular_16384max4_1.jpg">
+	<img id="pd7" crossorigin="anonymous" src="img/201902-023_21.jpg">
+	<img id="pd8" crossorigin="anonymous" src="img/201803-89_03.jpg">
+	<img id="pd9" crossorigin="anonymous" src="img/origin_3_0_Panorama.jpg">
+
+        <img id="pd2-thumb" crossorigin="anonymous" src="img/pd2-thumb.png">
+        <img id="pd3-thumb" crossorigin="anonymous" src="img/pd3-thumb.png">
+        <img id="pd4-thumb" crossorigin="anonymous" src="img/pd4-thumb.png">
+        <img id="pd5-thumb" crossorigin="anonymous" src="img/pd5-thumb.png">
+        <img id="pd6-thumb" crossorigin="anonymous" src="img/pd6-thumb.png">
+	<img id="pd7-thumb" crossorigin="anonymous" src="img/pd7-thumb.png">
+        <img id="pd8-thumb" crossorigin="anonymous" src="img/pd8-thumb.png">
+        <img id="pd9-thumb" crossorigin="anonymous" src="img/pd9-thumb.png">
+
+        <audio id="click-sound" crossorigin="anonymous" src="https://cdn.aframe.io/360-image-gallery-boilerplate/audio/click.ogg"></audio>
+
+        <script id="link" type="text/html">
+          <a-entity class="link"
+            geometry="primitive: plane; height: 1; width: 1"
+            material="shader: flat; src: ${thumb}"
+            event-set__1="_event: mousedown; scale: 1 1 1"
+            event-set__2="_event: mouseup; scale: 1.2 1.2 1"
+            event-set__3="_event: mouseenter; scale: 1.2 1.2 1"
+            event-set__4="_event: mouseleave; scale: 1 1 1"
+            set-image="on: click; target: #image-360; src: ${src}"
+            sound="on: click; src: #click-sound"></a-entity>
+        </script>
+      </a-assets>
+
+      <a-sky id="image-360" radius="10" src="#pd9"></a-sky>
+
+      <a-entity id="links0" layout="type: line; margin: 1.5" position="-2.25 0 -4">
+       <a-entity template="src: #link" data-src="#pd2" data-thumb="#pd2-thumb"></a-entity>
+       <a-entity template="src: #link" data-src="#pd3" data-thumb="#pd3-thumb"></a-entity>
+       <a-entity template="src: #link" data-src="#pd4" data-thumb="#pd4-thumb"></a-entity>
+       <a-entity template="src: #link" data-src="#pd5" data-thumb="#pd5-thumb"></a-entity>
+      </a-entity>
+
+      <a-entity id="links1" layout="type: line; margin: 1.5" position="-2.25 -1.5 -4">
+        <a-entity template="src: #link" data-src="#pd6" data-thumb="#pd6-thumb"></a-entity>
+	<a-entity template="src: #link" data-src="#pd7" data-thumb="#pd7-thumb"></a-entity>
+	<a-entity template="src: #link" data-src="#pd8" data-thumb="#pd8-thumb"></a-entity>
+	<a-entity template="src: #link" data-src="#pd9" data-thumb="#pd9-thumb"></a-entity>
+      </a-entity>
+
+      <a-entity camera look-controls>
+        <a-cursor id="cursor"
+          animation__click="property: scale; startEvents: click; from: 0.1 0.1 0.1; to: 1 1 1; dur: 150"
+          animation__fusing="property: fusing; startEvents: fusing; from: 1 1 1; to: 0.1 0.1 0.1; dur: 1500"
+          event-set__1="_event: mouseenter; color: springgreen"
+          event-set__2="_event: mouseleave; color: black"
+          fuse="true"
+          raycaster="objects: .link"></a-cursor>
+      </a-entity>
+    </a-scene>
+  </body>
+</html>
