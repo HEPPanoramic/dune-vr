@@ -1,0 +1,16 @@
+{
+    "short_name": "DUNEVR",
+    "name": "DUNEVR",
+    "icons": [
+	{
+	    "src": "img/dunelogo-small.png",
+	    "sizes": "64x64",
+	    "type": "image/png"
+	}
+    ],
+    "scope": "/",  
+    "start_url": "/",
+    "display": "standalone",
+    "orientation": "portrait"
+}
+
