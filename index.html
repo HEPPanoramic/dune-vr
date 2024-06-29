@@ -19,48 +19,77 @@
     <script src="https://unpkg.com/aframe-proxy-event-component@2.1.0/dist/aframe-proxy-event-component.min.js"></script>
    
     <script src="components/set-image.js"></script>
+
+    <script>
+      AFRAME.registerComponent('set-text', {
+
+	  schema: {
+	      on: {type: 'string'},
+	      src: {type: 'string'}
+	  },
+
+	  init: function() {
+	      let data = this.data;
+	      let el = this.el;
+
+	      el.addEventListener(data.on, function() {
+
+		  let id = data.src.substring(1);
+		  let text = document.getElementById(id).getAttribute('title');
+		  document.getElementById('img-text').setAttribute('value', text);
+		  
+	      });
+	      
+	  }
+	  
+      });
+    </script>		  
+
   </head>
   <body>
     <a-scene>
       <a-assets>
 
 	<img id="outside-np02"
-	     title="Outside NP02"
+	     title="Outside the NP02 dual-phase detector"
 	     crossorigin="anonymous"
 	     src="img/aaOIxlVQ8Ogy_equirectangular_16384max4_1.jpg">
 	
 	<img id="top-np04"
-	     title="Top of NP04"
+	     title="View from atop the NP04 single-phase detector"
 	     crossorigin="anonymous"
 	     src="img/tyqEZ6Dk3EPz_equirectangular_16384max4_1.jpg">
 
 	<img id="outside-np04"
-	     title="Outside NP04"
+	     title="Outside the NP04 single-phase detector"
 	     crossorigin="anonymous"
 	     src="img/sZcFdUyWDUWk_equirectangular_16384max4_1.jpg">
 
 	<img id="inside-np04"
-	     title="Inside NP04"
+	     title="Inside the NP04 single-phase detector during construction"
 	     crossorigin="anonymous"
 	     src="img/vFxvEOLcTeYg_equirectangular_16384max4.jpg">
 
-	<img id="pd6" crossorigin="anonymous" src="img/CElRvU108Bbr_equirectangular_16384max4_1.jpg">
-
 	<img id="inside-np02-3"
-	     title="Inside NP02 07.02.2019"
+	     title="Inside the NP02 dual-phase detector during contruction"
 	     crossorigin="anonymous"
 	     src="img/201902-023_21.jpg">
 
 	<img id="inside-np02-2"
-	     title="Inside NP02 09.04.2018"
+	     title="Inside the NP02 dual-phase detector during construction"
 	     crossorigin="anonymous"
 	     src="img/201803-89_03.jpg">
 
 	<img id="inside-np02-1"
-	     title="Inside NP02 11.10.2017"
+	     title="Inside the NP02 dual-phase detector during construction"
 	     crossorigin="anonymous"
 	     src="img/origin_3_0_Panorama.jpg">
 
+	<img id="inside-np02-4"
+	     title="Inside the NP02 dual-phase detector"
+	     crossorigin="anonymous"
+	     src="img/DSC07295_Panorama_2048.png">
+	
         <img id="pd2-thumb" crossorigin="anonymous" src="img/pd2-thumb.png">
         <img id="pd3-thumb" crossorigin="anonymous" src="img/pd3-thumb.png">
         <img id="pd4-thumb" crossorigin="anonymous" src="img/pd4-thumb.png">
@@ -69,6 +98,7 @@
 	<img id="pd7-thumb" crossorigin="anonymous" src="img/pd7-thumb.png">
         <img id="pd8-thumb" crossorigin="anonymous" src="img/pd8-thumb.png">
         <img id="pd9-thumb" crossorigin="anonymous" src="img/pd9-thumb.png">
+	<img id="pd10-thumb" crossorigin="anonymous" src="img/pd10-thumb.png">
 
 	<img id="dune-logo" crossorigin="anonymous" src="img/dune-horiz-logo-lg.png">
 	<img id="qn-logo" crossorigin="anonymous" src="img/Quarknet.jpg">
@@ -85,6 +115,7 @@
             event-set__3="_event: mouseenter; scale: 1.2 1.2 1"
             event-set__4="_event: mouseleave; scale: 1 1 1"
             set-image="on: click; target: #image-360; src: ${src}"
+	    set-text="on: click; src: ${src}" 
             sound="on: click; src: #click-sound"></a-entity>
         </script>
       </a-assets>
@@ -104,6 +135,7 @@
 	<a-entity template="src: #link" data-src="#inside-np02-1" data-thumb="#pd9-thumb"></a-entity>
 	<a-entity template="src: #link" data-src="#inside-np02-2" data-thumb="#pd8-thumb"></a-entity>
 	<a-entity template="src: #link" data-src="#inside-np02-3" data-thumb="#pd7-thumb"></a-entity>
+	<a-entity template="src: #link" data-src="#inside-np02-4" data-thumb="#pd10-thumb"></a-entity>
       </a-entity>
 
       <a-entity camera look-controls>
@@ -117,12 +149,17 @@
 	</a-cursor>
       </a-entity>
 
-      <a-entity position="-2.25 -1.5 -4"
-		text="anchor: left; width: 5; color: white; value: Inside the NP02 dual-phase detector during contruction"></a-entity>
+      <a-text position="-2.25 -1.5 -4"
+              anchor="left"
+	      width="5"
+	      color="white"
+	      id="img-text"
+	      value="Inside the NP02 dual-phase detector during contruction"></a-text>
       
       <a-image src="#sussex-logo" position="1.8 -3 -4.0" scale="0.5 0.5 0.5"></a-image>
       <a-image src="#qn-logo" position="2.4 -3 -4.0" scale="0.5 0.5 0.5"></a-image>
 
     </a-scene>
+    
   </body>
 </html>
